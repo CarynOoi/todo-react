@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const api = axios.create({baseUL: 'http://localhost:5196/api'});
+const api = axios.create({baseURL: 'http://localhost:5196/api'});
 
-axios.get('/TodoItems')
-.then (response => {
-    console.log(response.data)
-});
+export const getAllTasks = () => api.get('/ToDoItems');
+
 
