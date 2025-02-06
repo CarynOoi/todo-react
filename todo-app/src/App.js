@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
-import { getTasks } from './services/api';
+import { getTasks, createTask, updateTask, deleteTask } from './services/api';
 
   const App = () => {
 
@@ -23,11 +23,26 @@ import { getTasks } from './services/api';
       setTasks([...tasks, newTask]);
     };
 
+    const handleUpdateTask = async (task) => {
+      const updatedTask = { ...task, isComplete: !task.isComplete };
+      await updateTask(updatedTask);
+      setTasks(tasks.map(t => 
+          t.id === task.id ? updatedTask : t
+      ));
+    };
+
+    const handleDeleteTask = async (task)=>{
+      const toBeDeleted = task.id;
+      await deleteTask(toBeDeleted);
+      setTasks(tasks.filter( t => t.id !== task.id));
+    };
+
     return  (
     <div>
       <h1>To-Do App</h1>
       <TaskForm onTaskAdded={handleTaskAdded} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask}  />
+
     </div>
   );
 };
