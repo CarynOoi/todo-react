@@ -7,7 +7,7 @@ const TaskForm = ({onTaskAdded}) => {
     const [name, setName] = useState('');
 
     const handleSubmit = async (e) =>{
-        e.preventDefault(); //preventting page from reloading while submitting form
+        e.preventDefault();
         const newTask = {name, completed: false};
         const response = await createTask(newTask);
         onTaskAdded(response.data);
