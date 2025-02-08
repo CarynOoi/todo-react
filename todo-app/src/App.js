@@ -39,8 +39,10 @@ import { getTasks, createTask, updateTask, deleteTask } from './services/api';
 
     return  (
     <div>
-      <h1>To-Do App</h1>
+      <div> <h1>To-Do App</h1> </div>
+      
       <TaskForm onTaskAdded={handleTaskAdded} />
+      <h2>Task List</h2>
       <TaskList tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask}  />
 
     </div>

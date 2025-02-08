@@ -3,15 +3,23 @@ import React from 'react';
 const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
     return (
         <div>
-            <h2>Completed Task</h2>
-            <ul>
+            <ul class="list-group">
                 {tasks.map((task) => (
-                    <li key={task.id}>
-                        <button onClick={() => onUpdateTask(task)}>
-                            {task.isComplete ? 'Complete' : 'Incomplete'}
+                    <li key={task.id} className="list-group-item">
+                        <input 
+                                className="form-check-input me-1" 
+                                type="checkbox" 
+                                checked={task.isComplete} 
+                                onChange={() => onUpdateTask(task)} 
+                                id={`checkbox-${task.id}`} 
+                            />
+                        
+                        <label className="form-check-label" htmlFor={`checkbox-${task.id}`}>
+                                {task.name}
+                            </label>
+                            <button className="btn btn-danger" onClick={() => onDeleteTask(task)}>
+                            <i className="bi bi-trash3-fill"></i>
                         </button>
-                        {task.name} 
-                        <button onClick ={() => onDeleteTask(task)}> delete </button>
                     </li>
                 ))}
             </ul>
